@@ -1,0 +1,77 @@
+{
+	"name": "@fluid-example/attributable-map",
+	"version": "2.0.1-rc.0.1.1",
+	"private": true,
+	"description": "Minimal Fluid Container & Data Object sample to implement a hit counter as a standalone app.",
+	"homepage": "https://fluidframework.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/FluidFramework.git",
+		"directory": "examples/apps/attributable-map"
+	},
+	"license": "MIT",
+	"author": "Microsoft and contributors",
+	"type": "module",
+	"scripts": {
+		"build": "fluid-build . --task build",
+		"build:compile": "fluid-build . --task compile",
+		"build:esnext": "tsc --project ./tsconfig.json",
+		"check:prettier": "prettier --check . --cache --ignore-path ../../../.prettierignore",
+		"clean": "rimraf --glob dist lib \"**/*.tsbuildinfo\" \"**/*.build.log\"",
+		"eslint": "eslint --format stylish src",
+		"eslint:fix": "eslint --format stylish src --fix --fix-type problem,suggestion,layout",
+		"format": "fluid-build --task format .",
+		"format:prettier": "prettier --write . --cache --ignore-path ../../../.prettierignore",
+		"lint": "fluid-build . --task lint",
+		"lint:fix": "fluid-build . --task eslint:fix --task format",
+		"prepack": "npm run webpack",
+		"start": "webpack serve",
+		"webpack": "webpack --env production",
+		"webpack:dev": "webpack --env development"
+	},
+	"dependencies": {
+		"@fluid-example/example-utils": "workspace:~",
+		"@fluid-experimental/attributable-map": "workspace:~",
+		"@fluid-experimental/attributor": "workspace:~",
+		"@fluidframework/aqueduct": "workspace:~",
+		"@fluidframework/container-definitions": "workspace:~",
+		"@fluidframework/container-runtime": "workspace:~",
+		"@fluidframework/container-runtime-definitions": "workspace:~",
+		"@fluidframework/core-interfaces": "workspace:~",
+		"@fluidframework/runtime-definitions": "workspace:~",
+		"@fluidframework/runtime-utils": "workspace:~"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.0.1",
+		"@fluid-tools/build-cli": "^0.2.2",
+		"@fluidframework/build-common": "^2.0.2",
+		"@fluidframework/build-tools": "^0.1.0",
+		"@fluidframework/eslint-config-fluid": "^5.1.1",
+		"@types/node": "^18.0.1",
+		"eslint": "~8.1.2",
+		"html-webpack-plugin": "^5.1.1",
+		"prettier": "~3.1.1",
+		"process": "^0.2.2",
+		"rimraf": "^4.1.1",
+		"ts-loader": "^9.1.2",
+		"typescript": "~5.0.2",
+		"webpack": "^5.2.1",
+		"webpack-cli": "^4.1.2",
+		"webpack-dev-server": "~4.1.2",
+		"webpack-merge": "^5.1.2"
+	},
+	"fluid": {
+		"browser": {
+			"umd": {
+				"files": [
+					"main.bundle.js"
+				],
+				"library": "main"
+			}
+		}
+	},
+	"typeValidation": {
+		"disabled": true,
+		"broken": {}
+	}
+}

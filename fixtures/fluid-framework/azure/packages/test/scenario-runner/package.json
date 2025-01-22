@@ -1,0 +1,113 @@
+{
+	"name": "@fluid-experimental/azure-scenario-runner",
+	"version": "2.1.2-rc.1.2.1",
+	"description": "Azure client end to end tests",
+	"homepage": "https://fluidframework.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/FluidFramework.git",
+		"directory": "azure/packages/test/end-to-end-tests"
+	},
+	"license": "MIT",
+	"author": "Microsoft and contributors",
+	"sideEffects": false,
+	"type": "module",
+	"scripts": {
+		"build": "fluid-build . --task build",
+		"build:compile": "fluid-build . --task compile",
+		"build:esnext": "tsc --project ./tsconfig.json",
+		"build:genver": "gen-version",
+		"build:test": "npm run build:test:esm",
+		"build:test:esm": "tsc --project ./src/test/tsconfig.json",
+		"check:prettier": "prettier --check . --cache --ignore-path ../../../../.prettierignore",
+		"clean": "rimraf --glob dist lib \"**/*.tsbuildinfo\" \"**/*.build.log\" nyc",
+		"eslint": "eslint --format stylish src",
+		"eslint:fix": "eslint --format stylish src --fix --fix-type problem,suggestion,layout",
+		"format": "fluid-build --task format .",
+		"format:prettier": "prettier --write . --cache --ignore-path ../../../../.prettierignore",
+		"lint": "fluid-build . --task lint",
+		"lint:fix": "fluid-build . --task eslint:fix --task format",
+		"start": "node ./lib/orchestratorRunner.js --config v1",
+		"start:scenario": "node ./lib/orchestratorRunner.js --config",
+		"start:server": "node ./lib/server.js",
+		"test": "npm run test:realsvc",
+		"test:coverage": "c8 npm test",
+		"test:realsvc": "npm run test:realsvc:tinylicious",
+		"test:realsvc:azure": "cross-env FLUID_CLIENT=azure npm run test:realsvc:azure:run",
+		"test:realsvc:azure:run": "mocha --recursive \"lib/test/**/*.spec.*js\" --exit --timeout 10000",
+		"test:realsvc:tinylicious": "start-server-and-test start:tinylicious:test 7071 test:realsvc:azure:run",
+		"test:realsvc:verbose": "cross-env FLUID_TEST_VERBOSE=1 npm run test:realsvc",
+		"typetests:gen": "fluid-type-test-generator",
+		"typetests:prepare": "flub typetests --dir . --reset --previous --normalize"
+	},
+	"c8": {
+		"all": true,
+		"cache-dir": "nyc/.cache",
+		"exclude": [
+			"src/test/**/*.*ts",
+			"lib/test/**/*.*js"
+		],
+		"exclude-after-remap": false,
+		"include": [
+			"src/**/*.*ts",
+			"lib/**/*.*js"
+		],
+		"report-dir": "nyc/report",
+		"reporter": [
+			"cobertura",
+			"html",
+			"text"
+		],
+		"temp-directory": "nyc/.nyc_output"
+	},
+	"dependencies": {
+		"@fluid-internal/client-utils": "workspace:~",
+		"@fluid-internal/test-driver-definitions": "workspace:~",
+		"@fluidframework/aqueduct": "workspace:~",
+		"@fluidframework/azure-client": "workspace:~",
+		"@fluidframework/container-definitions": "workspace:~",
+		"@fluidframework/container-loader": "workspace:~",
+		"@fluidframework/core-interfaces": "workspace:~",
+		"@fluidframework/core-utils": "workspace:~",
+		"@fluidframework/counter": "workspace:~",
+		"@fluidframework/fluid-static": "workspace:~",
+		"@fluidframework/map": "workspace:~",
+		"@fluidframework/matrix": "workspace:~",
+		"@fluidframework/sequence": "workspace:~",
+		"@fluidframework/telemetry-utils": "workspace:~",
+		"@fluidframework/test-runtime-utils": "workspace:~",
+		"@fluidframework/test-utils": "workspace:~",
+		"commander": "^5.1.1",
+		"cross-env": "^7.1.0",
+		"js-yaml": "^4.1.1",
+		"mocha": "^10.2.1",
+		"sinon": "^17.1.1",
+		"start-server-and-test": "^2.1.2",
+		"tinylicious": "^4.1.2",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.0.1",
+		"@fluid-tools/build-cli": "^0.0.1",
+		"@fluidframework/build-common": "^2.2.1",
+		"@fluidframework/build-tools": "^0.2.1",
+		"@fluidframework/eslint-config-fluid": "^5.2.0",
+		"@types/js-yaml": "^4.2.1",
+		"@types/mocha": "^9.1.0",
+		"@types/nock": "^9.2.1",
+		"@types/node": "^18.1.2",
+		"@types/sinon": "^17.1.1",
+		"@types/uuid": "^9.2.0",
+		"c8": "^8.1.1",
+		"copyfiles": "^2.1.1",
+		"eslint": "~8.2.0",
+		"nock": "^13.2.2",
+		"prettier": "~3.1.1",
+		"rimraf": "^4.0.1",
+		"typescript": "~5.2.1"
+	},
+	"typeValidation": {
+		"disabled": true,
+		"broken": {}
+	}
+}

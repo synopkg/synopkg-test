@@ -1,0 +1,74 @@
+{
+	"name": "@fluid-example/bundle-size-tests",
+	"version": "2.1.0-rc.2.2.1",
+	"private": true,
+	"description": "A package for understanding the bundle size of Fluid Framework",
+	"homepage": "https://fluidframework.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/FluidFramework.git",
+		"directory": "examples/utils/bundle-size-tests"
+	},
+	"license": "MIT",
+	"author": "Microsoft and contributors",
+	"type": "module",
+	"scripts": {
+		"build": "fluid-build . --task build",
+		"build:compile": "fluid-build . --task compile",
+		"build:esnext": "tsc --project ./tsconfig.json",
+		"check:prettier": "prettier --check . --cache --ignore-path ../../../.prettierignore",
+		"clean": "rimraf --glob dist lib bundleAnalysis \"**/*.tsbuildinfo\" \"**/*.build.log\"",
+		"eslint": "eslint --format stylish src",
+		"eslint:fix": "eslint --format stylish src --fix --fix-type problem,suggestion,layout",
+		"format": "fluid-build --task format .",
+		"format:prettier": "prettier --write . --cache --ignore-path ../../../.prettierignore",
+		"lint": "fluid-build . --task lint",
+		"lint:fix": "fluid-build . --task eslint:fix --task format",
+		"prepack": "npm run webpack",
+		"webpack": "webpack",
+		"webpack:profile": "npm run webpack"
+	},
+	"dependencies": {
+		"@fluid-experimental/odsp-client": "workspace:~",
+		"@fluidframework/aqueduct": "workspace:~",
+		"@fluidframework/azure-client": "workspace:~",
+		"@fluidframework/container-loader": "workspace:~",
+		"@fluidframework/container-runtime": "workspace:~",
+		"@fluidframework/container-runtime-definitions": "workspace:~",
+		"@fluidframework/map": "workspace:~",
+		"@fluidframework/matrix": "workspace:~",
+		"@fluidframework/odsp-driver": "workspace:~",
+		"@fluidframework/sequence": "workspace:~",
+		"@fluidframework/tree": "workspace:~",
+		"fluid-framework": "workspace:~",
+		"source-map-loader": "^2.2.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.0.0",
+		"@cerner/duplicate-package-checker-webpack-plugin": "~2.1.1",
+		"@fluid-tools/version-tools": "^0.0.1",
+		"@fluidframework/build-common": "^2.0.2",
+		"@fluidframework/build-tools": "^0.1.2",
+		"@fluidframework/bundle-size-tools": "^0.1.0",
+		"@fluidframework/eslint-config-fluid": "^5.2.2",
+		"@mixer/webpack-bundle-compare": "^0.1.2",
+		"@types/node": "^18.2.1",
+		"eslint": "~8.0.0",
+		"prettier": "~3.2.1",
+		"puppeteer": "^22.1.2",
+		"rimraf": "^4.2.1",
+		"string-replace-loader": "^3.2.2",
+		"ts-loader": "^9.1.0",
+		"typescript": "~5.0.0",
+		"webpack": "^5.2.1",
+		"webpack-bundle-analyzer": "^4.0.1",
+		"webpack-cli": "^4.2.0"
+	},
+	"comments": [
+		"@cerner/duplicate-package-checker-webpack-plugin is pinned since newer version (2.1 through 2.0) refuse to work on NodeJS other than 10 || 12 || 14 due to https://github.com/cerner/terra-toolkit/issues/828"
+	],
+	"typeValidation": {
+		"disabled": true,
+		"broken": {}
+	}
+}

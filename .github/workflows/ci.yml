@@ -1,0 +1,38 @@
+name: Verify main
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    name: Lint and test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+      - name: Set up cargo cache
+        uses: Swatinem/rust-cache@v2
+      - name: Install just
+        uses: extractions/setup-just@v1
+        with:
+          just-version: 1.35.0
+      - name: Check cargo
+        run: just check-cargo
+      - name: Lint formatting
+        run: just check-formatting
+      - name: Lint clippy
+        run: just check-clippy
+      - name: Cargo test
+        run: just test
