@@ -1,10 +1,14 @@
-# synotest
+# Temporary repo.
 
-<p align="center">
-  <img src="https://synopkg.github.io/synotest/logo.svg" width="200" height="179" alt="">
-  <br>Consistent dependency versions in large JavaScript Monorepos.
-  <br><a href="https://synopkg.github.io/synotest">https://synopkg.github.io/synotest</a>
-</p>
+<a aria-label="synopkg logo" href="https://synopkg.github.io/synotest">
+  <img alt="" src="https://img.shields.io/badge/Made%20by%20synopkg-000000.svg?style=flat-square&logo=synopkg&labelColor=000">
+</a>
+<a aria-label="NPM version" href="https://www.npmjs.com/package/octotask">
+  <img alt="" src="https://img.shields.io/npm/v/synopkg.svg?style=flat-square&labelColor=000000">
+</a>
+<a aria-label="CI status" href="https://github.com/synopkg/synopkg-test/actions/workflows/test-site.yaml?query=event%3Apush+branch%3Amain">
+  <img alt="" src="https://img.shields.io/github/actions/workflow/status/synopkg/synopkg-test/test-site.yaml?event=push&branch=main&style=flat-square&labelColor=000000">
+</a>
 
 ## Rust
 
